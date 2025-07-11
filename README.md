@@ -1,96 +1,27 @@
-# 📦 Sistema de Facturación y Gestión de Inventario
+# 💼 Sistema de Facturación y Gestión de Inventario
 
-Este proyecto es una aplicación web de facturación que permite registrar usuarios, iniciar sesión, crear facturas con productos seleccionados desde un inventario y visualizar el historial de facturas. Toda la información se almacena en una base de datos MySQL y el frontend es totalmente personalizado.
+Este proyecto es una plataforma básica para gestionar facturación, inventario, autenticación de usuarios y ahora, **registro de gastos**. Está construida con:
 
-## 🚀 Características
+- Node.js + Express
+- MySQL
+- HTML/CSS/JS vanilla
 
-- ✅ Registro e inicio de sesión de usuarios con contraseña encriptada.
-- 🧾 Registro de facturas con productos seleccionados desde un inventario.
-- 📦 Gestión de productos: nombre, descripción, cantidad, precio.
-- 💰 Cálculo automático de totales.
-- 🧮 Detalles por factura con desglose de productos.
-- 📋 Historial de facturas.
-- 🔐 Autenticación simple (sin JWT).
-- 📄 Opción de impresión de factura (pendiente/mejorable).
+## 📦 Módulos principales
 
-## 📁 Estructura del Proyecto
+- 🔐 Login y registro de usuarios
+- 📋 Gestión de inventario (crear, editar, eliminar productos)
+- 🧾 Registro y visualización de facturas
+- 📊 Registro de gastos monetarios
 
-```
-facturas_js/
-├── backend/
-│   ├── db.js
-│   ├── server.js
-│   └── routes/
-│       ├── auth.js
-│       ├── facturas.js
-│       └── inventario.js
-├── frontend/
-│   ├── css/
-│   │   └── *.css
-│   ├── js/
-│   │   ├── factura.js
-│   │   ├── invoices.js
-│   │   └── login.js
-│   ├── factura.html
-│   ├── invoices.html
-│   ├── login.html
-│   └── home.html
-├── .env
-├── package.json
-└── README.md
-```
+---
 
-## ⚙️ Instalación y Configuración
+## 🧾 Facturación
 
-### 1. Clonar el repositorio
+Permite registrar facturas con múltiples productos, calcular totales y guardar detalles en la base de datos.
 
-```bash
-git clone https://github.com/usuario/facturas_js.git
-cd facturas_js
-```
-
-### 2. Instalar dependencias
-
-```bash
-npm install
-```
-
-### 3. Crear archivo `.env`
-
-```dotenv
-DB_HOST=localhost
-DB_USER=tu_usuario
-DB_PASS=tu_contraseña
-DB_NAME=facturacion
-PORT=3000
-```
-
-### 4. Ejecutar servidor
-
-```bash
-node backend/server.js
-```
-
-## 🗃️ Base de Datos
-
-Asegúrate de crear una base de datos con las siguientes tablas:
+### Base de datos:
 
 ```sql
-CREATE TABLE usuarios (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(100),
-  email VARCHAR(100) UNIQUE,
-  password VARCHAR(255)
-);
-
-CREATE TABLE productos (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(100),
-  descripcion TEXT,
-  cantidad INT,
-  precio DECIMAL(10,2)
-);
-
 CREATE TABLE facturas (
   id INT AUTO_INCREMENT PRIMARY KEY,
   cliente VARCHAR(100),
@@ -101,38 +32,145 @@ CREATE TABLE facturas (
 CREATE TABLE detalle_factura (
   id INT AUTO_INCREMENT PRIMARY KEY,
   factura_id INT,
-  descripcion TEXT,
+  producto_id INT,
   cantidad INT,
   precio DECIMAL(10,2),
-  FOREIGN KEY (factura_id) REFERENCES facturas(id) ON DELETE CASCADE
+  FOREIGN KEY (factura_id) REFERENCES facturas(id),
+  FOREIGN KEY (producto_id) REFERENCES productos(id)
 );
 ```
 
-## 🛠 Tecnologías Usadas
+---
 
-- **Node.js**
-- **Express**
-- **MySQL / mysql2**
-- **HTML5, CSS3, JavaScript**
-- **bcryptjs**
-- **dotenv**
-- **Fetch API (Frontend)**
+## 📦 Inventario
 
-## 📌 Pendientes o Mejoras Futuras
+Permite registrar productos con:
 
-- Autenticación con JWT.
-- Control de sesiones.
-- Impresión directa de factura.
-- Roles de usuario (admin/empleado).
-- Filtros por fecha o cliente en facturas.
-- Soporte para múltiples productos con stock dinámico.
+- Nombre
+- Descripción
+- Cantidad
+- Precio
 
-## 👨‍💻 Autor
+Soporta edición y eliminación.
 
-Desarrollado por **Sebastián Gómez**  
-Estudiante de Ingeniería de Software  
-Corporación Universitaria Iberoamericana
+```sql
+CREATE TABLE productos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100),
+  descripcion TEXT,
+  cantidad INT,
+  precio DECIMAL(10,2)
+);
+```
 
-## 📬 Contacto
+---
 
-Si tienes dudas o sugerencias, puedes escribirme por GitHub o a mi correo personal.
+## 🛠 Usuarios
+
+- Registro de nuevos usuarios con nombre, email y contraseña (encriptada con bcrypt).
+- Inicio de sesión básico con verificación.
+
+```sql
+CREATE TABLE usuarios (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) UNIQUE,
+  email VARCHAR(100) UNIQUE,
+  password VARCHAR(255)
+);
+```
+
+---
+
+## 💸 Nuevo módulo: Gastos de Dinero
+
+Permite registrar salidas de efectivo, con información detallada.
+
+### 📥 Campos:
+
+- Descripción (obligatorio)
+- Monto (obligatorio)
+- Fecha (obligatorio)
+- Categoría (opcional)
+- Observaciones (opcional)
+
+### 📚 Base de datos:
+
+```sql
+CREATE TABLE gastos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  descripcion VARCHAR(255) NOT NULL,
+  monto DECIMAL(10,2) NOT NULL,
+  fecha DATE NOT NULL,
+  categoria VARCHAR(100),
+  observaciones TEXT
+);
+```
+
+### 📂 Rutas backend:
+
+`routes/gastos.js`:
+
+```js
+router.get('/', async (req, res) => {
+  const [gastos] = await db.query('SELECT * FROM gastos ORDER BY fecha DESC');
+  res.json(gastos);
+});
+
+router.post('/', async (req, res) => {
+  const { descripcion, monto, fecha, categoria, observaciones } = req.body;
+  if (!descripcion || !monto || !fecha) return res.status(400).json({ error: 'Campos obligatorios: descripción, monto, fecha' });
+  await db.query('INSERT INTO gastos (descripcion, monto, fecha, categoria, observaciones) VALUES (?, ?, ?, ?, ?)', [descripcion, monto, fecha, categoria, observaciones]);
+  res.status(201).json({ message: 'Gasto registrado correctamente' });
+});
+```
+
+### 📄 Frontend:
+
+- `frontend/gastos.html`
+- `frontend/js/gastos.js`
+- `frontend/css/gastos.css`
+
+---
+
+## 🚀 Instrucciones de uso
+
+1. Clona el repositorio:
+   ```
+   git clone https://github.com/GmzQzvZ/facturas_js.git
+   ```
+
+2. Instala dependencias:
+   ```
+   cd backend
+   npm install
+   ```
+
+3. Crea el archivo `.env`:
+   ```
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASS=tu_clave
+   DB_NAME=facturacion
+   PORT=3000
+   ```
+
+4. Ejecuta el servidor:
+   ```
+   node backend/server.js
+   ```
+
+---
+
+## 📌 Pendientes / Ideas
+
+- Reportes financieros (ingresos vs gastos)
+- Exportar PDF
+- Filtrado avanzado por fecha o categoría
+- Dashboard general con estadísticas
+
+---
+
+## 🧑‍💻 Autor
+
+Sebastián Gómez Q.  
+[GitHub](https://github.com/GmzQzvZ)
