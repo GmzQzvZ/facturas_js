@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="container">
+        <form action="/login" method="post" class="login-form">
+            <div class="login">
+                <img src="img/logo-sin.png" alt="Logo" class="logo">
+                <h1>Inicio de Sesión</h1>
+
+                <input type="text" placeholder="Username" name="username" id="username" required><br>
+                <input type="password" placeholder="Password" name="password" id="password" required><br>
+
+                <br><hr><br>
+
+                <a href="recovery.html" class="forgot">¿Olvidaste tu contraseña?</a><br><br>
+
+                <input type="submit" value="Iniciar Sesión"><br><br>
+
+                <!-- Botón de registro -->
+                <a href="register.html" class="register-button">¿No tienes cuenta? Regístrate</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+<script src="js/login.js"></script>
+
+

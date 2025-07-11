@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="container">        
+        <form action="/api/auth/register" method="post" class="login-form">
+            <img src="img/logo-sin.png" alt="Logo" class="logo">
+            <h1>Registro</h1>
+            
+            <input type="text" name="username" placeholder="Nombre de usuario" id="username" required>
+            <input type="email" name="email" placeholder="Correo electrónico" id="email" required>
+            <input type="password" name="password" placeholder="Contraseña" id="password" required>
+            
+            <input type="submit" value="Registrarse">
+        </form>
+    </div>
+</body>
+</html>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('.login-form');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // evita que recargue la página
+
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    if (!username || !email || !password) {
+      alert('Por favor completa todos los campos.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, email, password })
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert('✅ Usuario registrado exitosamente');
+        window.location.href = 'login.html'; // redirige al login
+      } else {
+        alert(`❌ Error: ${result.error || 'No se pudo registrar'}`);
+      }
+    } catch (error) {
+      console.error('Error de red:', error);
+      alert('❌ Error al conectar con el servidor');
+    }
+  });
+});
+</script>

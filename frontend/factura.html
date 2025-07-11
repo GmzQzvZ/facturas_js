@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulario de Factura</title>
+  <link rel="stylesheet" href="css/factura.css" />
+</head>
+<body>
+  <button onclick="history.back()" class="boton-back">⬅ Volver</button>
+
+  <div class="container">
+    <h1>Formulario de Factura</h1>
+    <form id="factura-form">
+      <label for="cliente">Cliente</label>
+      <input type="text" id="cliente" placeholder="Nombre del cliente" required>
+
+      <label for="fecha">Fecha</label>
+      <input type="date" id="fecha" required>
+
+      <h3>Productos</h3>
+      <div id="productos-container"></div>
+
+      <button type="button" id="agregar-producto">+ Agregar otro producto</button>
+
+      <h3>Total: <span id="total-factura">$0</span></h3>
+      <button type="submit">Registrar Factura</button>
+    </form>
+  </div>
+
+  <!-- ✅ Aquí está el cambio importante -->
+  <script src="js/facturas.js"></script>
+</body>
+</html>

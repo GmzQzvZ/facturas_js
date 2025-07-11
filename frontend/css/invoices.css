@@ -1,0 +1,195 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #79767698;
+  color: #333;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color:#553838b2;
+  color: white;
+}
+
+header h1 {
+  font-size: 22px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+header .logo {
+  max-width: 100px;
+  height: auto;
+  margin: 0;
+}
+
+.login-link button {
+  background-color: #cc2e2e;
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+.cerrar-sesion {
+  background-color: #cc2e2e;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.cerrar-sesion:hover {
+  background-color: #27ae60;
+}
+
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+.form-section,
+.table-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 10px;
+}
+
+form input,
+form button {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+form button {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+form button:hover {
+  background-color: #219150;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #34495e;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+@media (max-width: 600px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+
+  table {
+    font-size: 14px;
+  }
+}
+
+.facturas{
+  display: inline-block;
+  background-color: #34db5e;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.contenedor-boton {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.boton-nueva-factura {
+  background-color: #34db42;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.boton-nueva-factura:hover {
+  background-color: #2980b9;
+}
+
+
+.boton-back {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton-back:hover {
+  background-color: #2980b9;
+}
+
+.eliminar {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #cc2e2e;
+  margin-left: 10px;
+}
+
+.eliminar:hover {
+  color: #e74c3c;
+}

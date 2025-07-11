@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM de Inventario</title>
+    <link rel="stylesheet" href="css/inv.css">
+</head>
+<body>
+    <header>
+      <button onclick="history.back()" class="boton-back">⬅ Volver</button>
+        <h1>INVENTARIO DE CAFE MEMORIAS</h1>
+            <img src="img/logo-sin.png" alt="Logo" class="logo">
+        <a href="login.html" class="login-link"><button>Cerrar Sesión</button></a>  
+    </header>
+
+    <main>
+        <section class="form-section">
+            <h2>Agregar Producto</h2>
+            <form id="form-producto">
+    <input type="text" id="nombre" placeholder="Nombre" required>
+    <input type="text" id="descripcion" placeholder="Descripción">
+    <input type="number" id="cantidad" placeholder="Cantidad" value="0">
+    <input type="number" step="0.01" id="precio" placeholder="Precio" required>
+    <button type="submit">Agregar Producto</button>
+  </form>
+
+  <table id="tabla-inventario">
+    <thead>
+      <tr>
+        <th>Nombre</th><th>Descripción</th><th>Cantidad</th><th>Precio</th><th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script 
+  
+  src="js/inventario.js">
+
+    form.querySelector('button').className = 'btn-agregar';
+
+  </script>
+</body>
+</html>
+

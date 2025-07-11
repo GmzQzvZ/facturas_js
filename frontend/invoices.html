@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro de Facturas</title>
+  <link rel="stylesheet" href="css/invoices.css">
+</head>
+<body>
+<header>
+  <button onclick="history.back()" class="boton-back">⬅ Volver</button>
+  <h1>FACTURAS DE CAFE MEMORIAS</h1>
+  <img src="img/logo-sin.png" alt="Logo" class="logo">
+  <a href="login.html" class="login-link"><button>Cerrar Sesión</button></a>  
+</header>
+<div class="contenedor-boton">
+  <a href="factura.html" class="boton-nueva-factura">➕ Nueva Factura</a>
+</div>
+
+  <main>
+    <section class="table-section">
+      <h2>Historial de Facturas</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Productos</th>
+            <th>Total</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="invoice-table">
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
+<script src="js/invoices.js"></script>

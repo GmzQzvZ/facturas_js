@@ -1,0 +1,113 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #79767698;
+  margin: 0;
+  padding: 30px;
+}
+
+.container {
+  max-width: 600px;
+  background-color: white;
+  margin: auto;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+h1, h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.producto-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background-color: #fafafa;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.producto-item input {
+  flex: 1;
+  min-width: 120px;
+}
+
+.producto-item .subtotal {
+  white-space: nowrap;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.producto-item .cantidad {
+  flex: 0 0 60px; /* no crecer, no reducir, ancho fijo */
+  max-width: 70px;
+  text-align: center;
+}
+
+.subtotal {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #2ecc71;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #27ae60;
+}
+
+#agregar-producto {
+  background-color: #3498db;
+}
+
+#agregar-producto:hover {
+  background-color: #2980b9;
+}
+
+#total-factura {
+  color: #e74c3c;
+}
+
+.boton-back {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton-back:hover {
+  background-color: #2980b9;
+}
