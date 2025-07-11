@@ -13,28 +13,52 @@ router.get('/', async (req, res) => {
   }
 });
 
-
 // Crear producto
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { nombre, descripcion, cantidad, precio } = req.body;
   if (!nombre || !precio) {
     return res.status(400).json({ error: 'Nombre y precio son obligatorios' });
   }
 
-  const sql = 'INSERT INTO productos (nombre, descripcion, cantidad, precio) VALUES (?, ?, ?, ?)';
-  db.query(sql, [nombre, descripcion, cantidad, precio], (err, result) => {
-    if (err) return res.status(500).json({ error: 'Error al guardar el producto' });
-    res.status(201).json({ message: 'Producto creado' });
-  });
+  try {
+    await db.query(
+      'INSERT INTO productos (nombre, descripcion, cantidad, precio) VALUES (?, ?, ?, ?)',
+      [nombre, descripcion, cantidad, precio]
+    );
+    res.status(201).json({ message: 'Producto creado correctamente' });
+  } catch (err) {
+    console.error('Error al guardar producto:', err);
+    res.status(500).json({ error: 'Error al guardar producto' });
+  }
+});
+
+// ✅ Actualizar producto
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { nombre, descripcion, cantidad, precio } = req.body;
+
+  try {
+    await db.query(
+      'UPDATE productos SET nombre = ?, descripcion = ?, cantidad = ?, precio = ? WHERE id = ?',
+      [nombre, descripcion, cantidad, precio, id]
+    );
+    res.json({ message: 'Producto actualizado correctamente' });
+  } catch (err) {
+    console.error('Error al actualizar producto:', err);
+    res.status(500).json({ error: 'Error al actualizar producto' });
+  }
 });
 
 // Eliminar producto
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   const id = req.params.id;
-  db.query('DELETE FROM productos WHERE id = ?', [id], (err, result) => {
-    if (err) return res.status(500).json({ error: 'Error al eliminar' });
-    res.json({ message: 'Producto eliminado' });
-  });
+  try {
+    await db.query('DELETE FROM productos WHERE id = ?', [id]);
+    res.json({ message: 'Producto eliminado correctamente' });
+  } catch (err) {
+    console.error('Error al eliminar producto:', err);
+    res.status(500).json({ error: 'Error al eliminar producto' });
+  }
 });
 
 module.exports = router;

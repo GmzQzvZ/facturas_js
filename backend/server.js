@@ -15,6 +15,8 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/inventario', require('./routes/inventario'));
 app.use('/api/facturas', require('./routes/invoices'));
+app.use('/api/gastos', require('./routes/gastos'));
+
 
 // Fallback a home
 app.get('/', (req, res) => {

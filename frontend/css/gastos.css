@@ -1,0 +1,156 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #79767698;
+    color: #333;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  padding: 10px 20px;
+  background-color: #553838b2;
+  color: white;
+}
+h1, h2 {
+  text-align: center;
+  color: #4a4a4a;
+}
+
+form {
+  max-width: 500px;
+  margin: 1rem auto 2rem auto;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+form input,
+form textarea,
+form button {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #3f51b5;
+}
+
+form button {
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #303f9f;
+}
+
+ul#lista-gastos {
+  max-width: 700px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+}
+
+ul#lista-gastos li {
+  background-color: #fff;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-left: 6px solid #3f51b5;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+ul#lista-gastos li strong {
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+ul#lista-gastos li em {
+  font-style: italic;
+  color: #666;
+  display: block;
+  margin-top: 0.3rem;
+}
+
+ul#lista-gastos li p {
+  margin: 0.5rem 0 0 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+
+header .logo {
+  max-width: 450px;
+  height: auto;
+  margin: 0;
+}
+
+.login-link button {
+  background-color: #cc2e2e;
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+.cerrar-sesion {
+  background-color: #cc2e2e;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.cerrar-sesion:hover {
+  background-color: #27ae60;
+}
+
+header .logo {
+  max-width: 100px;
+  height: auto;
+  margin: 0;
+}
+
+.boton-back {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton-back:hover {
+  background-color: #2980b9;
+}
+
+button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}

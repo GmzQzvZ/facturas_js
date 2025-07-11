@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Gastos</title>
+  <link rel="stylesheet" href="css/gastos.css">
+</head>
+
+<header>
+    <button onclick="history.back()" class="boton-back">⬅ Volver</button>
+        <h1>GASTOS DE CAFE MEMORIA</h1>
+            <img src="img/logo-sin.png" alt="Logo" class="logo">
+        <a href="login.html" class="login-link"><button>Cerrar Sesión</button></a>  
+</header>
+
+
+<body>
+  <h1>Registro de Gastos</h1>
+  <form id="form-gasto">
+    <input type="text" id="descripcion" placeholder="Descripción" required>
+    <input type="number" id="monto" placeholder="Monto" step="0.01" required>
+    <input type="date" id="fecha" required>
+    <input type="text" id="categoria" placeholder="Categoría (opcional)">
+    <textarea id="observaciones" placeholder="Observaciones (opcional)"></textarea>
+    <button type="submit">Registrar Gasto</button>
+  </form>
+
+  <h2>Gastos Registrados</h2>
+  <ul id="lista-gastos"></ul>
+
+  <script src="js/gastos.js"></script>
+</body>
+</html>

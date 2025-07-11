@@ -45,7 +45,7 @@ const imprimirFactura = async (facturaId) => {
       </style>
     </head>
     <body>
-      <h1>Café Memorias</h1>
+      <h1>Café Memoria</h1>
       <p><strong>Cliente:</strong> ${factura.cliente}</p>
       <p><strong>Fecha:</strong> ${new Date(factura.fecha).toLocaleDateString()}</p>
       <div class="factura">

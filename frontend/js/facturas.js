@@ -112,10 +112,10 @@ const registrarFactura = async (e) => {
     body: JSON.stringify({ cliente, fecha, total, detalles })
   });
 
-  const data = await res.json();
+    const data = await res.json();
   if (res.ok) {
     alert('Factura registrada correctamente');
-    location.reload();
+    window.location.href = '/invoices.html';
   } else {
     alert(data.error || 'Error al registrar la factura');
   }
