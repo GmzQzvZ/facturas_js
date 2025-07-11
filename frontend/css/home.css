@@ -33,11 +33,11 @@ main {
 }
 
 .card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 30px;
-  width: 100%;
-  max-width: 800px;
+  display: flex;
+  justify-content: space-around; /* Espacio entre las tarjetas */
+  flex-wrap: wrap; /* Permite que se ajusten en pantallas pequeñas */
+  gap: 20px;
+  padding: 20px;
 }
 
 .card {
