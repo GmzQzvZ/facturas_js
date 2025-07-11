@@ -106,32 +106,6 @@ CREATE TABLE gastos (
 );
 ```
 
-### 📂 Rutas backend:
-
-`routes/gastos.js`:
-
-```js
-router.get('/', async (req, res) => {
-  const [gastos] = await db.query('SELECT * FROM gastos ORDER BY fecha DESC');
-  res.json(gastos);
-});
-
-router.post('/', async (req, res) => {
-  const { descripcion, monto, fecha, categoria, observaciones } = req.body;
-  if (!descripcion || !monto || !fecha) return res.status(400).json({ error: 'Campos obligatorios: descripción, monto, fecha' });
-  await db.query('INSERT INTO gastos (descripcion, monto, fecha, categoria, observaciones) VALUES (?, ?, ?, ?, ?)', [descripcion, monto, fecha, categoria, observaciones]);
-  res.status(201).json({ message: 'Gasto registrado correctamente' });
-});
-```
-
-### 📄 Frontend:
-
-- `frontend/gastos.html`
-- `frontend/js/gastos.js`
-- `frontend/css/gastos.css`
-
----
-
 ## 🚀 Instrucciones de uso
 
 1. Clona el repositorio:
@@ -161,16 +135,9 @@ router.post('/', async (req, res) => {
 
 ---
 
-## 📌 Pendientes / Ideas
-
-- Reportes financieros (ingresos vs gastos)
-- Exportar PDF
-- Filtrado avanzado por fecha o categoría
-- Dashboard general con estadísticas
-
----
 
 ## 🧑‍💻 Autor
 
 Sebastián Gómez Q.  
 [GitHub](https://github.com/GmzQzvZ)
+Estudiante de Ingeniería en Software de la Universidad Iberomaericana
