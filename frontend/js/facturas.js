@@ -13,7 +13,7 @@ const crearProductoSelect = () => {
   const tipo = document.createElement('input');
   tipo.type = 'text';
   tipo.className = 'tipo-input';
-  tipo.placeholder = 'Ej: Servicio, Producto...';
+  tipo.placeholder = 'Prenda';
   tipo.required = true;
 
   const cantidad = document.createElement('input');
@@ -111,7 +111,7 @@ const registrarFactura = async (e) => {
     body: JSON.stringify({ cliente, fecha, total, detalles })
   });
 
-    const data = await res.json();
+  const data = await res.json();
   if (res.ok) {
     alert('Factura registrada correctamente');
     window.location.href = '/invoices.html';

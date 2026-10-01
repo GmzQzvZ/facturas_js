@@ -9,7 +9,7 @@ const cargarFacturas = async () => {
     const fila = document.createElement('tr');
 
     const productos = f.productos.map(p =>
-      `${p.descripcion} (x${p.cantidad}) - $${parseFloat(p.precio).toFixed(2)}`
+      `<strong>${p.tipo}</strong>: ${p.descripcion} (x${p.cantidad}) - $${parseFloat(p.precio).toFixed(2)}`
     ).join('<br>');
 
     fila.innerHTML = `
@@ -45,20 +45,22 @@ const imprimirFactura = async (facturaId) => {
       </style>
     </head>
     <body>
-      <h1>Café Memoria</h1>
+      <h1>Factura de Venta</h1>
       <p><strong>Cliente:</strong> ${factura.cliente}</p>
       <p><strong>Fecha:</strong> ${new Date(factura.fecha).toLocaleDateString()}</p>
       <div class="factura">
         <table>
           <thead>
-            <tr><th>Descripción</th><th>Cantidad</th><th>Precio</th></tr>
+            <tr><th>Tipo</th><th>Descripción</th><th>Cantidad</th><th>Precio Unitario</th><th>Subtotal</th></tr>
           </thead>
           <tbody>
             ${factura.productos.map(p => `
               <tr>
+                <td>${p.tipo}</td>
                 <td>${p.descripcion}</td>
                 <td>${p.cantidad}</td>
                 <td>$${parseFloat(p.precio).toFixed(2)}</td>
+                <td>$${(p.cantidad * p.precio).toFixed(2)}</td>
               </tr>
             `).join('')}
           </tbody>
