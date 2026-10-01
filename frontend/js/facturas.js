@@ -1,9 +1,7 @@
 let productos = [];
 
-// Cargar productos desde inventario
+// Cargar productos eliminado ya que ahora es texto libre
 const cargarProductos = async () => {
-  const res = await fetch('/api/inventario');
-  productos = await res.json();
   agregarProductoSelect(); // primera fila
 };
 
@@ -12,6 +10,12 @@ const crearProductoSelect = () => {
   const item = document.createElement('div');
   item.className = 'producto-item';
 
+  const tipo = document.createElement('input');
+  tipo.type = 'text';
+  tipo.className = 'tipo-input';
+  tipo.placeholder = 'Ej: Servicio, Producto...';
+  tipo.required = true;
+
   const cantidad = document.createElement('input');
   cantidad.type = 'number';
   cantidad.className = 'cantidad';
@@ -19,26 +23,21 @@ const crearProductoSelect = () => {
   cantidad.value = 1;
   cantidad.required = true;
 
-  const select = document.createElement('select');
-  select.className = 'producto-select';
-  productos.forEach(p => {
-    const option = document.createElement('option');
-    option.value = p.id;
-    option.textContent = `${p.nombre} - $${parseFloat(p.precio).toFixed(2)}`;
-    select.appendChild(option);
-  });
+  const descripcion = document.createElement('input');
+  descripcion.type = 'text';
+  descripcion.className = 'descripcion';
+  descripcion.placeholder = 'Detalles...';
 
-  const precio = document.createElement('input');
-  precio.type = 'number';
-  precio.className = 'precio';
-  precio.step = '0.01';
-  precio.readOnly = true;
-  precio.required = true;
-  precio.value = productos[0]?.precio || 0;
+  const valorUnitario = document.createElement('input');
+  valorUnitario.type = 'number';
+  valorUnitario.className = 'precio';
+  valorUnitario.step = '0.01';
+  valorUnitario.placeholder = '0.00';
+  valorUnitario.required = true;
 
   const subtotal = document.createElement('span');
   subtotal.className = 'subtotal';
-  subtotal.textContent = `$${precio.value}`;
+  subtotal.textContent = '$0.00';
 
   const eliminarBtn = document.createElement('button');
   eliminarBtn.type = 'button';
@@ -49,21 +48,20 @@ const crearProductoSelect = () => {
     calcularTotal();
   });
 
-  select.addEventListener('change', () => {
-    const prod = productos.find(p => p.id == select.value);
-    if (prod) precio.value = prod.precio;
-    subtotal.textContent = `$${(precio.value * cantidad.value).toFixed(2)}`;
+  const actualizarSubtotal = () => {
+    const val = parseFloat(valorUnitario.value) || 0;
+    const cant = parseInt(cantidad.value) || 0;
+    subtotal.textContent = `$${(val * cant).toFixed(2)}`;
     calcularTotal();
-  });
+  };
 
-  cantidad.addEventListener('input', () => {
-    subtotal.textContent = `$${(precio.value * cantidad.value).toFixed(2)}`;
-    calcularTotal();
-  });
+  cantidad.addEventListener('input', actualizarSubtotal);
+  valorUnitario.addEventListener('input', actualizarSubtotal);
 
+  item.appendChild(tipo);
   item.appendChild(cantidad);
-  item.appendChild(select);
-  item.appendChild(precio);
+  item.appendChild(descripcion);
+  item.appendChild(valorUnitario);
   item.appendChild(subtotal);
   item.appendChild(eliminarBtn);
   document.getElementById('productos-container').appendChild(item);
@@ -94,7 +92,8 @@ const registrarFactura = async (e) => {
   const fecha = document.getElementById('fecha').value;
 
   const detalles = Array.from(document.querySelectorAll('.producto-item')).map(item => ({
-    producto_id: parseInt(item.querySelector('select').value),
+    tipo: item.querySelector('.tipo-input').value,
+    descripcion: item.querySelector('.descripcion').value,
     cantidad: parseInt(item.querySelector('.cantidad').value),
     precio: parseFloat(item.querySelector('.precio').value)
   }));

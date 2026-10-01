@@ -9,18 +9,18 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, 'frontend')));
 
 // Rutas
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/inventario', require('./routes/inventario'));
-app.use('/api/facturas', require('./routes/invoices'));
-app.use('/api/gastos', require('./routes/gastos'));
+app.use('/api/auth', require('./backend/routes/auth'));
+app.use('/api/inventario', require('./backend/routes/inventario'));
+app.use('/api/facturas', require('./backend/routes/invoices'));
+app.use('/api/gastos', require('./backend/routes/gastos'));
 
 
 // Fallback a home
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/home.html'));
+  res.sendFile(path.join(__dirname, 'frontend/home.html'));
 });
 
 

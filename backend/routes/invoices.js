@@ -15,19 +15,11 @@ router.post('/', async (req, res) => {
 
     const facturaId = factura.insertId;
 
-    // Insertar productos
+    // Insertar detalles
     for (const item of detalles) {
-      // Buscar el nombre del producto desde la tabla productos
-      const [producto] = await db.query(
-        'SELECT nombre FROM productos WHERE id = ?',
-        [item.producto_id]
-      );
-
-      if (!producto.length) continue; // Si el producto no existe, omitir
-
       await db.query(
-        'INSERT INTO detalle_factura (factura_id, descripcion, cantidad, precio) VALUES (?, ?, ?, ?)',
-        [facturaId, producto[0].nombre, item.cantidad, item.precio]
+        'INSERT INTO detalle_factura (factura_id, tipo, descripcion, cantidad, precio) VALUES (?, ?, ?, ?, ?)',
+        [facturaId, item.tipo, item.descripcion, item.cantidad, item.precio]
       );
     }
 
@@ -46,7 +38,7 @@ router.get('/', async (req, res) => {
 
     for (const factura of facturas) {
       const [detalles] = await db.query(
-        'SELECT descripcion, cantidad, precio FROM detalle_factura WHERE factura_id = ?',
+        'SELECT tipo, descripcion, cantidad, precio FROM detalle_factura WHERE factura_id = ?',
         [factura.id]
       );
 

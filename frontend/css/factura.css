@@ -36,33 +36,39 @@ input {
   border-radius: 6px;
 }
 
+.productos-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 3fr 1fr 40px;
+  gap: 10px;
+  align-items: center;
+  font-weight: bold;
+  padding: 0 10px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
 .producto-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 3fr 1fr 40px;
+  gap: 10px;
+  align-items: center;
   border: 1px solid #ddd;
   padding: 10px;
   border-radius: 6px;
   margin-bottom: 10px;
   background-color: #fafafa;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
 }
 
-.producto-item input {
-  flex: 1;
-  min-width: 120px;
+.producto-item input, .producto-item select {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .producto-item .subtotal {
   white-space: nowrap;
   font-weight: bold;
   color: #2c3e50;
-}
-
-.producto-item .cantidad {
-  flex: 0 0 60px; /* no crecer, no reducir, ancho fijo */
-  max-width: 70px;
-  text-align: center;
+  text-align: right;
 }
 
 .subtotal {

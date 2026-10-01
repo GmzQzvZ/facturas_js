@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulario de Factura CAFE MEMORIA</title>
+  <title>Formulario de Factura</title>
   <link rel="stylesheet" href="css/factura.css" />
 </head>
 <body>
@@ -20,6 +20,13 @@
       <input type="date" id="fecha" required>
 
       <h3>Productos</h3>
+      <div class="productos-header">
+        <div>Tipo</div>
+        <div>Cantidad</div>
+        <div>Descripción</div>
+        <div>Valor</div>
+        <div></div>
+      </div>
       <div id="productos-container"></div>
 
       <button type="button" id="agregar-producto">+ Agregar otro producto</button>
